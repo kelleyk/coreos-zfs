@@ -24,7 +24,7 @@ export GITHUB_TOKEN=cc56a97b67b0885636210eb10d5048f99e297a2f
 # That means that your build artifact will be in 'artifacts/current' instead of being marked with a version number like it should be.
 # We could use `https://stable.release.core-os.net/amd64-usr/current/version.txt` to work around this in the future.
 export COREOS_CHANNEL=stable
-export COREOS_RELEASE=1298.5.0
+export COREOS_RELEASE=1353.7.0
 export ZFS_VERSION=0.6.5.9
 
 export TRACE=y
