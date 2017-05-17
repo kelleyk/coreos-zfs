@@ -2,8 +2,13 @@
 
 . set-vars.sh
 
-set -euf${TRACE:+x}o pipefail
+set -euf${TRACE:+x} -o pipefail
 trap 'exit' EXIT
+
+# TODO: Unfortunately, this script relies on file globbing.
+set +f
+# TODO: Fixes the indirect expansion (${!module_depends}) below.
+set +u
 
 export CI_PROJECT_DIR="${CI_PROJECT_DIR:-$PWD}"
 export DEST="${DEST:-/artifacts/build}"
@@ -23,8 +28,11 @@ curl --retry 5 -L "$COREOS_CPIO_URL" | gunzip | cpio -i
 unsquashfs -no-xattrs /tmp/usr.squashfs
 
 cd /tmp/squashfs-root/lib64 && tar c modules | tar xC /lib
-# @KK: stable is currently 'lib/modules/4.9.9-coreos-r1'
-export LINUX_BASE="$(ls -d /lib/modules/*-coreos-* | tail -1)"
+# @KK: For stable releases, this directory has been
+#   'lib/modules/4.9.9-coreos-r1'
+#   'lib/modules/4.9.24-coreos'
+# (etc.)
+export LINUX_BASE="$(ls -d /lib/modules/*-coreos{,-*} | tail -1)"
 
 cd /tmp/squashfs-root/share && tar c coreos | tar xC /usr/share
 
