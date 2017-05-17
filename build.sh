@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -e${TRACE:+x}o pipefail
+. set-vars.sh
+
+set -euf${TRACE:+x}o pipefail
 trap 'exit' EXIT
 
 export CI_PROJECT_DIR="${CI_PROJECT_DIR:-$PWD}"
@@ -18,10 +20,11 @@ export DEST_DIR="$CI_PROJECT_DIR/artifacts/$COREOS_RELEASE/${ZFS_VERSION:-git}"
 
 cd /tmp
 curl --retry 5 -L "$COREOS_CPIO_URL" | gunzip | cpio -i
-unsquashfs /tmp/usr.squashfs
+unsquashfs -no-xattrs /tmp/usr.squashfs
 
 cd /tmp/squashfs-root/lib64 && tar c modules | tar xC /lib
-export LINUX_BASE="$(ls -d /lib/modules/*coreos | tail -1)"
+# @KK: stable is currently 'lib/modules/4.9.9-coreos-r1'
+export LINUX_BASE="$(ls -d /lib/modules/*-coreos-* | tail -1)"
 
 cd /tmp/squashfs-root/share && tar c coreos | tar xC /usr/share
 
