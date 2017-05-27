@@ -11,3 +11,8 @@
 
 - If you're here because `install-zfs.service` failed (e.g. because machines updated to a new CoreOS release), then
   issue `systemctl restart install-zfs.service` on them and proceed!
+
+## Changing repository location
+
+- (There are almost certainly other things to update, but...)
+  - Check URL in `systemd/system/zfs-release-upgrade.service`.

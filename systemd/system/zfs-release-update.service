@@ -10,4 +10,4 @@ WantedBy=zfs.target
 Type=oneshot
 RemainAfterExit=yes
 EnvironmentFile=/usr/share/coreos/lsb-release
-ExecStart=/usr/bin/coreos-cloudinit --from-url=https://github.com/steigr/coreos-zfs/releases/download/${DISTRIB_RELEASE}/zfs-offline.yml
+ExecStart=/usr/bin/coreos-cloudinit --from-url=https://github.com/kelleyk/coreos-zfs/releases/download/${DISTRIB_RELEASE}/zfs-offline.yml
