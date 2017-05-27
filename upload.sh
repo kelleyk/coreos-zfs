@@ -12,7 +12,7 @@ export COREOS_CHANNEL="${COREOS_CHANNEL:-alpha}"
 export ARTIFACT_DIRECTORY="$CI_PROJECT_DIR/artifacts/$COREOS_RELEASE/${ZFS_VERSION:-git}"
 
 export RELEASE_TAG="$COREOS_RELEASE"
-export RELEASE_NAME="ZFS ${ZFS_VERSION:-git} on Linux for CoreOS $COREOS_CHANNEL/$COREOS_RELEASE"
+export RELEASE_NAME="ZFS ${ZFS_VERSION:-git} on Linux for CoreOS $COREOS_RELEASE"
 [[ "$ZFS_VERSION" ]] || export RELEASE_IS_PRERELEASE="--pre-release"
 
 curl -L $GITHUB_RELEASE_URL | bunzip2 | tar xC /usr/local/bin --strip-components=3
