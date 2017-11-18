@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . set-vars.sh
+. set-repo-key.sh
 
 export CI_PROJECT_DIR="${CI_PROJECT_DIR:-$PWD}"
 

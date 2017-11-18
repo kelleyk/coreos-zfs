@@ -1,2 +1,3 @@
 .gitlab-ci.new.yml
 /artifacts
+/set-repo-key.sh

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+mm#!/usr/bin/env bash
 
 . set-vars.sh
 
@@ -87,7 +87,7 @@ find $OEM_PATH -name '*.ko' | xargs -r -t -n1 strip --strip-unneeded --strip-deb
 
 find $BIN_DIR $SBIN_DIR $LIB_DIR -type f -not -name '*.ko' | xargs -n1 file | grep ELF | cut -f1 -d":" | xargs -r -t -n1 strip
 
-DEPENDENCY_zfs="zunicode zavl zcommon znvpair spl"
+DEPENDENCY_zfs="zunicode zavl zcommon znvpair spl icp"
 DEPENDENCY_icp="spl"
 DEPENDENCY_zcommon="spl znvpair"
 DEPENDENCY_znvpair="spl"

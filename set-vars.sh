@@ -16,7 +16,7 @@ export RELEASE_IS_PRERELEASE=""
 
 export GITHUB_USER=kelleyk
 export GITHUB_REPO=coreos-zfs
-export GITHUB_TOKEN=cc56a97b67b0885636210eb10d5048f99e297a2f
+# N.B.: GITHUB_TOKEN is set in `set-repo-key.sh` so that it can be excluded from version control.
 
 # -----
 
@@ -24,7 +24,8 @@ export GITHUB_TOKEN=cc56a97b67b0885636210eb10d5048f99e297a2f
 # That means that your build artifact will be in 'artifacts/current' instead of being marked with a version number like it should be.
 # We could use `https://stable.release.core-os.net/amd64-usr/current/version.txt` to work around this in the future.
 export COREOS_CHANNEL=stable
-export COREOS_RELEASE=1353.7.0
-export ZFS_VERSION=0.6.5.9
+# export COREOS_RELEASE=1535.2.0
+export COREOS_RELEASE=1520.6.0
+export ZFS_VERSION=0.7.2
 
 export TRACE=y
