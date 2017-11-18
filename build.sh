@@ -1,4 +1,4 @@
-mm#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 . set-vars.sh
 
