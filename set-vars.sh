@@ -26,6 +26,6 @@ export GITHUB_REPO=coreos-zfs
 export COREOS_CHANNEL=stable
 # export COREOS_RELEASE=1535.2.0
 export COREOS_RELEASE=1520.8.0
-export ZFS_VERSION=0.7.2
+export ZFS_VERSION=0.7.3
 
 export TRACE=y
