@@ -25,7 +25,7 @@ export GITHUB_REPO=coreos-zfs
 # We could use `https://stable.release.core-os.net/amd64-usr/current/version.txt` to work around this in the future.
 export COREOS_CHANNEL=beta
 # export COREOS_RELEASE=1535.2.0
-export COREOS_RELEASE=1576.2.0
+export COREOS_RELEASE=1590.2.0
 export ZFS_VERSION=0.7.3
 
 export TRACE=y
