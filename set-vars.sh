@@ -23,9 +23,8 @@ export GITHUB_REPO=coreos-zfs
 # build.sh is not smart enough to detect COREOS_RELEASE from this; it uses the `current` symlink provided by the CoreOS release archive.
 # That means that your build artifact will be in 'artifacts/current' instead of being marked with a version number like it should be.
 # We could use `https://stable.release.core-os.net/amd64-usr/current/version.txt` to work around this in the future.
-export COREOS_CHANNEL=beta
-# export COREOS_RELEASE=1535.2.0
-export COREOS_RELEASE=1590.2.0
-export ZFS_VERSION=0.7.3
+export COREOS_CHANNEL=stable
+export COREOS_RELEASE=1632.2.1
+export ZFS_VERSION=0.7.6
 
 export TRACE=y
