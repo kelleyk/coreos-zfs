@@ -16,3 +16,9 @@
 
 - (There are almost certainly other things to update, but...)
   - Check URL in `systemd/system/zfs-release-upgrade.service`.
+
+## Build requirements
+
+- Versions of CoreOS using the 4.14.11 kernel or later require `libelf-dev` to be installed; otherwise,
+  `docker-build.sh` will fail with the error "nable to build an empty module".  (If you look at `config.log` in the
+  `spl` source tree, you can see the actual error, which asks to you to install `libelf-dev`.)
