@@ -23,6 +23,12 @@ export ZFS_GIT_BRANCH="${ZFS_VERSION:-$(basename $CI_BUILD_REF_NAME | sed -e 's/
 export MAKE_PARALLEL="$(grep -c processor /proc/cpuinfo)"
 export DEST_DIR="$CI_PROJECT_DIR/artifacts/$COREOS_RELEASE/${ZFS_VERSION:-git}"
 
+## XXX @KK: TEMP
+# It's important to install libcrypto.so.1.0.0 and not libcrypto.so.1.1.0, because current versions of CoreOS only
+# provide the former.  The userspace tools (zpool, zfs, etc.) will fail to run.
+apt-get update && apt-get install -y --no-install-recommends libssl1.0-dev
+## XXX: @KK: END TEMP
+
 cd /tmp
 curl --retry 5 -L "$COREOS_CPIO_URL" | gunzip | cpio -i
 unsquashfs -no-xattrs /tmp/usr.squashfs
@@ -42,26 +48,11 @@ cd /tmp/squashfs-root/lib64 && tar c libcrypto.so* | tar xC /usr/lib64
 rm -rf $SYSTEMD_DIR $UDEV_DIR $MODULES_LOAD_DIR $DEFAULT_FILE $SYSTCONF_DIR
 
 if [[ "$ZFS_VERSION" ]]; then
-  mkdir -p /usr/src/zfs /usr/src/spl
-  curl --retry 5 -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS_VERSION}/spl-${ZFS_VERSION}.tar.gz | tar zxvC /usr/src/spl --strip-components=1
+  mkdir -p /usr/src/zfs
   curl --retry 5 -sL https://github.com/zfsonlinux/zfs/releases/download/zfs-${ZFS_VERSION}/zfs-${ZFS_VERSION}.tar.gz | tar zxvC /usr/src/zfs --strip-components=1
 else
   git clone --single-branch git://github.com/zfsonlinux/zfs.git /usr/src/zfs
-  git clone --single-branch git://github.com/zfsonlinux/spl.git /usr/src/spl
 fi
-
-cd /usr/src/spl
-./autogen.sh
-./configure \
-  --sysconfdir=/etc \
-  --bindir=$BIN_DIR \
-  --sbindir=$SBIN_DIR \
-  --libdir=$LIB_DIR \
-  --with-linux=$LINUX_BASE/source \
-  --with-linux-obj=$LINUX_BASE/build \
-  --runstatedir=/run
-make -j$MAKE_PARALLEL
-make install
 
 cd /usr/src/zfs
 ./autogen.sh
@@ -87,7 +78,7 @@ find $OEM_PATH -name '*.ko' | xargs -r -t -n1 strip --strip-unneeded --strip-deb
 
 find $BIN_DIR $SBIN_DIR $LIB_DIR -type f -not -name '*.ko' | xargs -n1 file | grep ELF | cut -f1 -d":" | xargs -r -t -n1 strip
 
-DEPENDENCY_zfs="zunicode zavl zcommon znvpair spl icp"
+DEPENDENCY_zfs="zunicode zavl zcommon znvpair spl icp zlua"
 DEPENDENCY_icp="spl"
 DEPENDENCY_zcommon="spl znvpair"
 DEPENDENCY_znvpair="spl"

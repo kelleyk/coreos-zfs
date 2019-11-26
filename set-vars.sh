@@ -24,7 +24,7 @@ export GITHUB_REPO=coreos-zfs
 # That means that your build artifact will be in 'artifacts/current' instead of being marked with a version number like it should be.
 # We could use `https://stable.release.core-os.net/amd64-usr/current/version.txt` to work around this in the future.
 export COREOS_CHANNEL=stable
-export COREOS_RELEASE=1967.3.0
-export ZFS_VERSION=0.7.12
+export COREOS_RELEASE=2135.5.0
+export ZFS_VERSION=0.8.1
 
 export TRACE=y
